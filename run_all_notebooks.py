@@ -7,6 +7,9 @@ import sys
 import nbformat
 from nbclient import NotebookClient
 
+# Unbuffered output
+sys.stdout.reconfigure(line_buffering=True)
+
 # Set environment variables so all notebooks pick them up
 os.environ["OPENAI_API_KEY"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyZTc5YTE4MS1jNGViLTQ2NjUtOWJhNy03MTQzM2MyMmY2ZWQiLCJleHAiOjE3NzY0NzYyNzIsImlhdCI6MTc3NjQzMzA3MiwianRpIjoiMWYxNjBjMmMtYTVlZC00NjJkLThiY2QtNTUzMTM5ZjYzY2MzIiwidHlwZSI6ImFjY2VzcyIsImlzcyI6ImNoYXQtcHJveHktYXBpIiwiYXVkIjoiY2hhdC1wcm94eS11c2VycyIsImVtYWlsIjoidEB0LmNvbSJ9.1-KbLGCrR3YTYxonDbeg-MkaJ68MDne1djRd5hUfVvw"
 os.environ["OPENAI_BASE_URL"] = "http://localhost:8001/v1"
@@ -36,7 +39,7 @@ for query in demo_queries:
 print("\\nGoodbye!")
 '''
 
-NOTEBOOKS = [
+ALL_NOTEBOOKS = [
     "session_1_llm_api_fundamentals.ipynb",
     "session_2_prompt_engineering.ipynb",
     "session_3_structured_outputs.ipynb",
@@ -48,6 +51,11 @@ NOTEBOOKS = [
     "session_9_capstone.ipynb",
 ]
 
+# Skip already-completed notebooks
+SKIP = set(sys.argv[1:]) if len(sys.argv) > 1 else set()
+NOTEBOOKS = [nb for nb in ALL_NOTEBOOKS if nb not in SKIP]
+
+
 def patch_interactive_cells(nb, notebook_name):
     """Replace interactive input() cells with predefined queries."""
     if notebook_name == "session_9_capstone.ipynb":
@@ -57,37 +65,40 @@ def patch_interactive_cells(nb, notebook_name):
                 cell.source = SESSION_9_INTERACTIVE_REPLACEMENT
     return nb
 
+
 def run_notebook(notebook_path, notebook_name):
     """Execute a notebook and save it with outputs."""
     print(f"\n{'='*60}")
     print(f"Running: {notebook_name}")
     print(f"{'='*60}")
-    
+
     nb = nbformat.read(notebook_path, as_version=4)
     nb = patch_interactive_cells(nb, notebook_name)
-    
+
     client = NotebookClient(
         nb,
-        timeout=300,  # 5 min per cell
+        timeout=600,  # 10 min per cell
         kernel_name="python3",
         resources={"metadata": {"path": WORKSPACE}},
+        allow_errors=True,  # Continue on errors, record them in cell output
     )
-    
+
     try:
         client.execute()
-        print(f"  SUCCESS: {notebook_name}")
+        print(f"  DONE: {notebook_name}")
     except Exception as e:
         print(f"  ERROR in {notebook_name}: {e}")
         # Still save partial results
-    
+
     # Save the notebook with outputs
     nbformat.write(nb, notebook_path)
     print(f"  Saved: {notebook_path}")
 
+
 def main():
     failed = []
     succeeded = []
-    
+
     for nb_name in NOTEBOOKS:
         nb_path = os.path.join(WORKSPACE, nb_name)
         if not os.path.exists(nb_path):
@@ -99,7 +110,7 @@ def main():
         except Exception as e:
             print(f"FATAL ERROR with {nb_name}: {e}")
             failed.append((nb_name, str(e)))
-    
+
     print(f"\n{'='*60}")
     print(f"SUMMARY")
     print(f"{'='*60}")
@@ -110,6 +121,7 @@ def main():
         print(f"Failed: {len(failed)}/{len(NOTEBOOKS)}")
         for name, err in failed:
             print(f"  ✗ {name}: {err}")
+
 
 if __name__ == "__main__":
     main()
