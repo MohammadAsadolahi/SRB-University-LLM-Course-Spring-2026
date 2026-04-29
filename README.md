@@ -61,7 +61,7 @@ The course follows a carefully designed progression arc — from foundational AP
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                                                                             │
-│   FOUNDATION          KNOWLEDGE & DATA       AUTONOMY & TOOLS   PRODUCTION │
+│   FOUNDATION          KNOWLEDGE & DATA       AUTONOMY & TOOLS   PRODUCTION  │
 │   Sessions 1-3        Sessions 4-5           Sessions 6-7       Sessions 8-9│
 │                                                                             │
 │   ▸ API Mastery       ▸ Embeddings           ▸ Function Calling ▸ Guardrails│
@@ -222,17 +222,17 @@ User Query
   │
   ▼
 ┌──────────────────┐
-│   GUARDRAILS      │ ◄── Session 8: Injection detection, content moderation
-│   Safety Check    │
+│   GUARDRAILS     │  ◄── Session 8: Injection detection, content moderation
+│   Safety Check   │
 └────────┬─────────┘
          ▼
 ┌──────────────────────────────────────────┐
-│             AGENT LOOP                    │ ◄── Session 7: ReAct reasoning
+│             AGENT LOOP                   │ ◄── Session 7: ReAct reasoning
 │                                          │
-│  ┌─────────┐ ┌─────────┐ ┌───────────┐  │
+│  ┌─────────┐ ┌─────────┐ ┌────────────┐  │
 │  │  RAG    │ │  TOOLS  │ │ CALCULATOR │  │ ◄── Sessions 5, 6, 3
 │  │ Search  │ │  Call   │ │  Evaluate  │  │
-│  └────┬────┘ └────┬────┘ └─────┬─────┘  │
+│  └────┬────┘ └────┬────┘ └─────┬──────┘  │
 │       └───────────┼────────────┘         │
 │                   ▼                      │
 │         ┌─────────────────┐              │
@@ -241,13 +241,13 @@ User Query
 │         └─────────────────┘              │
 └──────────────────┬───────────────────────┘
                    ▼
-         ┌─────────────────┐
-         │   LLM CORE      │ ◄── Sessions 1-2: Chat Completions + Prompting
+         ┌──────────────────┐
+         │   LLM CORE       │ ◄── Sessions 1-2: Chat Completions + Prompting
          │ Chat Completions │
-         └────────┬────────┘
+         └────────┬─────────┘
                   ▼
             ┌──────────┐
-            │ RESPONSE  │ + Conversation Memory (Session 7)
+            │ RESPONSE │ + Conversation Memory (Session 7)
             └──────────┘
 ```
 
@@ -395,8 +395,7 @@ After completing this course, students are equipped to explore:
 
 <p align="center">
   <br/>
-  <strong>Designed & Taught by AG</strong><br/>
-  <em>Chief AI Officer, Google</em><br/>
+  <strong>Designed & Taught by Mohammad Asadolahi</strong><br/>
   <em>SARIAU (SRB University) — Spring 2026</em><br/>
   <br/>
   <img src="https://img.shields.io/badge/Made_with-Expertise-4285F4?style=flat-square&labelColor=0d1117" alt="Made with Expertise"/>
