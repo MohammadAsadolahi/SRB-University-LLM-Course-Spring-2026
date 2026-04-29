@@ -11,9 +11,8 @@
 <h3 align="center">From API Fundamentals to Production-Grade Agents</h3>
 
 <p align="center">
-  <strong>SARIAU (SRB University) — Spring 2026 Semester</strong><br/>
-  <em>A 9-session, hands-on graduate course designed and taught by</em><br/>
-  <strong>AG — Chief AI Officer, Google</strong>
+  <strong>SARIAU  — Spring 2026 Semester</strong><br/>
+  <em>A 9-session, hands-on graduate course designed and taught by Mohammad Asadolahi and AI :)</em><br/>
 </p>
 
 <p align="center">
