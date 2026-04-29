@@ -396,7 +396,4 @@ After completing this course, students are equipped to explore:
   <br/>
   <strong>Designed & Taught by Mohammad Asadolahi</strong><br/>
   <em>SARIAU (SRB University) — Spring 2026</em><br/>
-  <br/>
-  <img src="https://img.shields.io/badge/Made_with-Expertise-4285F4?style=flat-square&labelColor=0d1117" alt="Made with Expertise"/>
-  <img src="https://img.shields.io/badge/Built_for-The_Next_Generation-34A853?style=flat-square&labelColor=0d1117" alt="Built for the Next Generation"/>
 </p>
